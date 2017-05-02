@@ -1,0 +1,20 @@
+.week-range-picker-component {
+    display: inline-block;
+    width: 400px;
+
+    & > span {
+        display: inline-block;
+        padding: 0 10px;
+    }
+
+    & > .ant-select {
+        width: 150px;
+
+        & > .ant-select-selection {
+
+            & > .ant-select-arrow {
+                right: 8px;
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+@import 'assets/css/variables';
+
+@keyframes sk-stretchdelay {
+    0%, 40%, 100% {
+        transform: scaleY(0.4);
+    }  20% {
+        transform: scaleY(1.0);
+    }
+}
+
+.app-loading-component {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: $brand-success;
+    display: flex;
+    align-items: center;
+
+    & > .spinner {
+        margin: 0 auto;
+        width: 50px;
+        height: 40px;
+        text-align: center;
+        font-size: 10px;
+
+        & > div {
+            background-color: #fff;
+            height: 100%;
+            width: 6px;
+            margin-left: 4px;
+            display: inline-block;
+            animation: sk-stretchdelay 1.2s infinite ease-in-out;
+
+            &.rect2 {
+                animation-delay: -1.1s;
+            }
+
+            &.rect3 {
+                animation-delay: -1.0s;
+            }
+
+            &.rect4 {
+                animation-delay: -0.9s;
+            }
+
+            &.rect5 {
+                animation-delay: -0.8s;
+            }
+        }
+    }
+}
+

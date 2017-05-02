@@ -1,0 +1,41 @@
+@import 'assets/css/variables';
+
+html,
+body,
+#app-container {
+    height: 100%;
+}
+
+body {
+    background: $body-background;
+}
+
+em {
+    font-style: normal;
+}
+
+.ant-table {
+    td.row-operation {
+        .ant-btn {
+            margin-right: 10px;
+        }
+    }
+}
+
+.search-panel {
+    margin: 10px 0 30px;
+}
+
+.container {
+    & > .ant-breadcrumb {
+        padding-bottom: 15px;
+    }
+}
+
+.brand-text {
+    color: $brand-success;
+}
+
+.hide {
+    display: none !important;
+}
