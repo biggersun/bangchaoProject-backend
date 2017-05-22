@@ -15,3 +15,7 @@ index.1.html
 ```bash
 index.2.html
 ```
+
+```bash
+js/custom.js  里面是发请求的地方
+```
