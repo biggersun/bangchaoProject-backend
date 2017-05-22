@@ -16,5 +16,15 @@ $(document).ready(function(){
       $li.addClass("open");
     }
   });
-  
 });
+var api = 'https://16909118.qcloud.la/bysj'
+
+function get(url, parmas, callback) {
+    $.ajax({
+        url: api + url,
+        type: 'GET',
+        data: parmas,
+        dataType: 'json',
+        success: callback
+    })
+}

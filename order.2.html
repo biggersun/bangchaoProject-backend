@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bootstrap Admin Theme v3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- styles -->
+    <link href="css/styles.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  	<div class="header">
+	     <div class="container">
+	        <div class="row">
+	           <div class="col-md-5">
+	              <!-- Logo -->
+	              <div class="logo">
+	                 <h1><a href="#">电器修理管理系统</a></h1>
+	              </div>
+	           </div>
+	           <div class="col-md-5">
+	              <div class="row">
+	                <div class="col-lg-12">
+	                </div>
+	              </div>
+	           </div>
+	           <div class="col-md-2">
+	              <div class="navbar navbar-inverse" role="banner">
+	                  <nav class="collapse navbar-collapse bs-navbar-collapse navbar-right" role="navigation">
+	                    <ul class="nav navbar-nav">
+	                      <li class="dropdown">
+	                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">账户管理<b class="caret"></b></a>
+	                        <ul class="dropdown-menu animated fadeInUp">
+	                          <li><a href="login.html">注销账户</a></li>
+	                        </ul>
+	                      </li>
+	                    </ul>
+	                  </nav>
+	              </div>
+	           </div>
+	        </div>
+	     </div>
+	</div>
+
+    <div class="page-content">
+    	<div class="row">
+		  <div class="col-md-2">
+		  	<div class="sidebar content-box" style="display: block;">
+				<ul class="nav">
+					<!-- Main menu -->
+					<li><a href="index.2.html"><i class="glyphicon glyphicon-home"></i>用户</a></li>
+					<li class="current"><a href="order.2.html"><i class="glyphicon glyphicon-calendar"></i>订单</a></li>
+					<li><a href="worker.2.html"><i class="glyphicon glyphicon-stats"></i>工人</a></li>
+					<li><a href="mashine.2.html"><i class="glyphicon glyphicon-list"></i>电器</a></li>
+					<li class="submenu">
+						<a href="#">
+							<i class="glyphicon glyphicon-list"></i> Pages
+							<span class="caret pull-right"></span>
+						</a>
+						<!-- Sub menu -->
+						<ul>
+							<li><a href="login.html">登录</a></li>
+							<li><a href="signup.html">注册</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		  </div>
+
+		  <div class="col-md-10">
+			<div class="row">
+					<div class="col-md-10">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">订单</div>
+
+							<div class="panel-options">
+								<a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+							</div>
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>姓名</th>
+				                  <th>住址</th>
+				                  <th>电话</th>
+				                  <th>品牌</th>
+				                  <th>电器类型</th>
+				                  <th>故障类型</th>
+				                  <th>工人</th>
+				                </tr>
+				              </thead>
+				              <tbody id="tbody">
+				                <tr>
+				                  <td>1</td>
+				                  <td>姓名</td>
+				                  <td>住址</td>
+				                  <td>电话</td>
+				                  <td>品牌</td>
+				                  <td>电器类型</td>
+				                  <td>故障类型</td>
+				                  <td>工人</td>
+				                  <td>
+															<button class="btn btn-default btn-xs">不通过</button>
+															<button class="btn btn-primary btn-xs">正在处理</button>
+															<button class="btn btn-info btn-xs">处理完成</button>
+													</td>
+				                </tr>
+				              </tbody>
+				            </table>
+		  				</div>
+		  			</div>
+			</div>
+    </div>
+		  </div>
+    	</div>
+    </div>
+
+    <footer>
+         <div class="container">
+
+            <div class="copy text-center">
+               Copyright 2014 <a href='#'>Website</a>
+            </div>
+
+         </div>
+      </footer>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/custom.js"></script>
+		<script>
+			$(document).ready(function() {
+					get('/Manage/listAllRepair.json', function(res) {
+						var html1 = res.map(function(item){
+							return `<tr><td>${item.id}</td><td>${item.name}</td><td>${item.adress}</td><td>${item.phoneNumber}</td><td>${item.brand}</td><td>${item.appCategory}</td><td>${item.breakCategory}</td><td>${item.worker}</td><td><button class="btn btn-default btn-xs">不通过</button><button class="btn btn-primary btn-xs">正在处理</button><button class="btn btn-info btn-xs">处理完成</button></td></tr>`;
+						})
+						var html2 = html1.join(',');
+						$('#tbody').append(html2);
+					});
+
+					$('.panel-body').on('click', '.btn',function(e){
+						var $target = $(e.currentTarget);
+						var	repairId = $target.data('repairid');
+						var	workerId = $target.data('workerid');
+						var	userId = $target.data('userid');
+						if($target.hasClass('btn-default')){
+							var params = {
+								repairId
+							}
+							get('/Manage/refuseRepair.do', params);
+						} else if ($target.hasClass('btn-primary')){
+							var params2 = {
+								repairId,
+								workerId,
+								userId,
+							}
+							get('/Manage/dealRepair.do', params2);
+						} else if($target.hasClass('btn-info')) {
+							var params3 = {
+								repairId
+							}
+							get('/Manage/doneRepair.do', params3);
+						}
+					});
+			});
+		</script>
+  </body>
+</html>

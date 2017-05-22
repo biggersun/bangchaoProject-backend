@@ -53,60 +53,58 @@
     	<div class="row">
 		  <div class="col-md-2">
 		  	<div class="sidebar content-box" style="display: block;">
-						<ul class="nav">
-							<!-- Main menu -->
-							<li><a href="index.1.html"><i class="glyphicon glyphicon-home"></i> 管理员管理</a></li>
-							<li><a href="adduser.1.html"><i class="glyphicon glyphicon-calendar"></i>用户管理</a></li>
-							<li><a href="addmashine.1.html"><i class="glyphicon glyphicon-stats"></i>电器管理</a></li>
-							<li><a href="addpepole.1.html"><i class="glyphicon glyphicon-list"></i>工人</a></li>
-							<li class="current"><a href="addbuy.1.html"><i class="glyphicon glyphicon-record"></i>购买记录管理</a></li>
-							<li class="submenu">
-										<a href="#">
-											<i class="glyphicon glyphicon-list"></i> Pages
-											<span class="caret pull-right"></span>
-										</a>
-										<!-- Sub menu -->
-										<ul>
-											<li><a href="login.html">登录</a></li>
-											<li><a href="signup.html">注册</a></li>
-									</ul>
-							</li>
-					</ul>
-				</div>
-		  </div>
-		  <div class="col-md-10">
-
-			<div class="row">
-				<div class="col-md-6">
-					<div class="content-box-large">
-						<div class="panel-heading">
-							<div class="panel-title">购买记录添加</div>
-						</div>
-						<div class="panel-body">
-							<form class="form-horizontal" role="form">
-								<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">电器ID</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputEmail3" placeholder="电器ID">
-								</div>
-								</div>
-								<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">用户ID</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputPassword3" placeholder="用户ID">
-								</div>
-								</div>
-								<div class="form-group">
-								<div class="col-sm-offset-2 col-sm-10">
-									<div id="addbtn" class="btn btn-primary">添加购买记录</div>
-								</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
+				<ul class="nav">
+					<!-- Main menu -->
+					<li class="current"><a href="index.2.html"><i class="glyphicon glyphicon-home"></i>用户</a></li>
+					<li><a href="order.2.html"><i class="glyphicon glyphicon-calendar"></i>订单</a></li>
+					<li><a href="worker.2.html"><i class="glyphicon glyphicon-stats"></i>工人</a></li>
+					<li><a href="mashine.2.html"><i class="glyphicon glyphicon-list"></i>电器</a></li>
+					<li class="submenu">
+						<a href="#">
+							<i class="glyphicon glyphicon-list"></i> Pages
+							<span class="caret pull-right"></span>
+						</a>
+						<!-- Sub menu -->
+						<ul>
+							<li><a href="login.html">登录</a></li>
+							<li><a href="signup.html">注册</a></li>
+						</ul>
+					</li>
+				</ul>
 			</div>
-		</div>
+		  </div>
+
+		  <div class="col-md-10">
+			<div class="row">
+					<div class="col-md-6">
+  					<div class="content-box-large">
+		  				<div class="panel-heading">
+							<div class="panel-title">用户</div>
+
+							<div class="panel-options">
+								<a href="#" data-rel="collapse"><i class="glyphicon glyphicon-refresh"></i></a>
+								<a href="#" data-rel="reload"><i class="glyphicon glyphicon-cog"></i></a>
+							</div>
+						</div>
+		  				<div class="panel-body">
+		  					<table class="table">
+				              <thead>
+				                <tr>
+				                  <th>#</th>
+				                  <th>名字</th>
+				                  <th>电话</th>
+				                  <th>openId</th>
+				                </tr>
+				              </thead>
+				              <tbody id="tbody">
+				              </tbody>
+				            </table>
+		  				</div>
+		  			</div>
+			</div>
+    </div>
+		  </div>
+    	</div>
     </div>
 
     <footer>
@@ -125,23 +123,15 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
 		<script>
-				$('#addbtn').on('click', function() {
-						var appId = $('#inputEmail3').val();
-						var userId = $('#inputPassword3').val();
-						var params = {
-							appId,
-							userId
-						}
-						get('/SuperManage/addBuyrecord.do', params, function(res) {
-							if(res.status === 0){
-								alert('已存在');
-							} else if(res.status === 1){
-								alert('添加成功');
-							} else {
-								alert('添加失败');
-							}
-						});
+			$(document).ready(function() {
+					get('/Manage/listUsers.json', function(res) {
+						var html1 = res.map(function(item){
+							return `<tr><td>+${item.id}</td><td>${item.name}</td><td>${item.phoneNumber}</td><td>${ite.openId}</td></tr>`;
+						})
+						var html2 = html1.join(',');
+						$('#tbody').append(html2);
 					});
+			});
 		</script>
   </body>
 </html>

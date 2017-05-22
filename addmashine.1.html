@@ -55,9 +55,9 @@
 		  	<div class="sidebar content-box" style="display: block;">
 						<ul class="nav">
 							<!-- Main menu -->
-							<li class="current"><a href="index.1.html"><i class="glyphicon glyphicon-home"></i> 管理员管理</a></li>
+							<li><a href="index.1.html"><i class="glyphicon glyphicon-home"></i> 管理员管理</a></li>
 							<li><a href="adduser.1.html"><i class="glyphicon glyphicon-calendar"></i>用户管理</a></li>
-							<li><a href="addmashine.1.html"><i class="glyphicon glyphicon-stats"></i>电器管理</a></li>
+							<li class="current"><a href="addmashine.1.html"><i class="glyphicon glyphicon-stats"></i>电器管理</a></li>
 							<li><a href="addpepole.1.html"><i class="glyphicon glyphicon-list"></i>工人</a></li>
 							<li><a href="addbuy.1.html"><i class="glyphicon glyphicon-record"></i>购买记录管理</a></li>
 							<li><a href="forms.html"><i class="glyphicon glyphicon-tasks"></i> Forms</a></li>
@@ -81,25 +81,37 @@
 				<div class="col-md-6">
 					<div class="content-box-large">
 						<div class="panel-heading">
-							<div class="panel-title">管理员添加</div>
+							<div class="panel-title">添加电器</div>
 						</div>
 						<div class="panel-body">
 							<form class="form-horizontal" role="form">
 								<div class="form-group">
-								<label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
+								<label for="inputEmail3" class="col-sm-2 control-label">类型</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="inputEmail3" placeholder="用户名">
+									<input type="text" class="form-control" id="appCategory" placeholder="类型">
 								</div>
 								</div>
 								<div class="form-group">
-								<label for="inputPassword3" class="col-sm-2 control-label">账户密码</label>
+								<label for="inputPassword3" class="col-sm-2 control-label">型号</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="inputPassword3" placeholder="账户密码">
+									<input type="text" class="form-control" id="appCode" placeholder="型号">
+								</div>
+								</div>
+								<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">品牌</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="brand" placeholder="品牌">
+								</div>
+								</div>
+								<div class="form-group">
+								<label for="inputEmail3" class="col-sm-2 control-label">保修期</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control" id="timeRepairForFree" placeholder="保修期">
 								</div>
 								</div>
 								<div class="form-group">
 								<div class="col-sm-offset-2 col-sm-10">
-									<button type="submit" class="btn btn-primary">添加管理员</button>
+									<div id="addbtn" class="btn btn-primary">添加电器</div>
 								</div>
 								</div>
 							</form>
@@ -125,5 +137,28 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
+		<script>
+				$('#addbtn').on('click', function() {
+						var appCategory = $('#appCategory').val();
+						var appCode = $('#appCode').val();
+						var brand = $('#brand').val();
+						var timeRepairForFree = $('#timeRepairForFree').val();
+						var params = {
+							appCategory,
+							appCode,
+							brand,
+							timeRepairForFree
+						}
+						get('/SuperManage/addEapp.do', params, function(res) {
+							if(res.status === 0){
+								alert('已存在');
+							} else if(res.status === 1){
+								alert('添加成功');
+							} else {
+								alert('添加失败');
+							}
+						});
+					});
+		</script>
   </body>
 </html>
